@@ -1,0 +1,4 @@
+interface:
+  display_name: "Docs Code Sync"
+  short_description: "Keep docs aligned with code"
+  default_prompt: "Use $docs-code-sync to update project docs from the current code."
