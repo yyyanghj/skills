@@ -1,6 +1,6 @@
 # Put Simplicity First
 
-Choose the smallest design that is clearly correct for the requirement that exists now. Add a layer only when it removes demonstrated complexity or protects a real boundary.
+Use these rules to choose function, module, API, and abstraction shape.
 
 Prefer boring code over impressive code when both solve the problem clearly.
 

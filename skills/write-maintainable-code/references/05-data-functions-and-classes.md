@@ -1,24 +1,23 @@
 # Choose Data, Functions, and Classes Deliberately
 
-Use plain data and functions by default. Use a class when an instance genuinely owns identity, lifecycle, mutable state, a resource, or invariants across operations.
+Prefer plain data and functions by default. Apply the criteria in `Use a Class When` before introducing a class.
 
 ## Prefer
 
 - Plain objects for data.
 - Functions for stateless behavior and transformations.
-- Regular or factory functions for constructing plain data when no lifecycle or invariant requires a class.
+- Regular or factory functions for constructing plain data.
 - Module-level behavior functions that take the primary data as the first parameter, such as `updateUser(user, patch)`.
 - Related data types and functions grouped in a module instead of a class used only as a namespace.
 - Modules as the default organization and privacy boundary; use class privacy when a justified class owns invariants.
+- In JavaScript and TypeScript, use named exports for cross-file APIs; avoid default-exported service classes used only as module containers.
 - Composition and explicit dependency passing over inheritance.
 - Modules that expose a small set of intentional operations.
-- Classes for resources, stateful lifecycles, framework requirements, or invariants that benefit from encapsulation.
 
 ## Avoid
 
 - Inheritance hierarchies used only to organize related behavior.
 - Abstract base classes with one implementation.
-- Objects whose only job is to wrap one function call.
 - `this`-dependent method chains when the object does not own meaningful state.
 - Constructors that hide I/O or other important setup work.
 - Decorators, dependency-injection frameworks, or mixins used as default organization tools.

@@ -1,4 +1,4 @@
-# Define Error Contracts
+# Handle Errors Deliberately
 
 Treat failure as part of the API contract. Distinguish expected absence from unexpected failure, and handle each error at the closest boundary that can act on it.
 

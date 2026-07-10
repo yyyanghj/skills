@@ -1,6 +1,6 @@
 # Apply TypeScript Conventions
 
-Use TypeScript to make data flow, public contracts, and failure modes clearer. Follow the repository before applying the defaults below.
+Use TypeScript to clarify data flow, public contracts, and failure modes. Apply the Priority in `SKILL.md` when guidance conflicts.
 
 ## Prefer
 
@@ -8,11 +8,9 @@ Use TypeScript to make data flow, public contracts, and failure modes clearer. F
 - Explicit types for exported APIs and boundary objects.
 - `unknown` plus narrowing for untrusted values.
 - Simple unions and interfaces before complex generics.
-- `function` declarations for file- and module-level functions.
+- Define file- and module-level functions with `function` declarations, not arrow-function expressions, unless a higher-priority repository or framework convention requires otherwise.
 - Arrow functions for callbacks and when the repository or framework expects expressions.
 - ESM imports and explicit extensions when required by the runtime.
-
-Using `function` declarations at module scope is a low-risk consistency preference. Do not rewrite established local style solely to enforce it.
 
 ## Avoid
 
@@ -23,7 +21,7 @@ Using `function` declarations at module scope is a low-risk consistency preferen
 - Unnecessary `void` prefixes before function calls.
 - Naming changes that create churn without improving clarity.
 
-For identifiers and file names, apply the general naming priority in `SKILL.md`.
+For identifiers and file names, apply the corresponding rules and priority in `SKILL.md`.
 
 ## Example
 

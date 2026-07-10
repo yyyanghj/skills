@@ -1,6 +1,6 @@
 # Keep Dynamic Behavior Explicit
 
-Prefer syntax and control flow that the expected maintainers can understand locally. Keep behavior selection, wiring, and runtime effects visible.
+Prefer syntax and control flow that maintainers can understand locally. Keep behavior selection, wiring, and runtime effects visible.
 
 ## Portability
 
@@ -57,12 +57,16 @@ class Square extends Shape {
 }
 ```
 
-Prefer explicit variants and centralized dispatch:
+Prefer explicit variants, centralized dispatch, and an exhaustive failure path:
 
 ```ts
 type Shape =
   | { kind: "circle"; radius: number }
   | { kind: "square"; side: number };
+
+function assertNever(value: never): never {
+  throw new Error(`Unsupported shape: ${JSON.stringify(value)}`);
+}
 
 function calculateArea(shape: Shape): number {
   switch (shape.kind) {
@@ -70,6 +74,8 @@ function calculateArea(shape: Shape): number {
       return Math.PI * shape.radius ** 2;
     case "square":
       return shape.side ** 2;
+    default:
+      return assertNever(shape);
   }
 }
 ```
