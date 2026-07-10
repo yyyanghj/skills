@@ -1,0 +1,23 @@
+skills/write-maintainable-code/references/04-functional-over-object-oriented.md
+  s_57626d2d710964::t_1eccfe362b73d6 3,23-24,26-27,43,52-55
+skills/write-maintainable-code/references/09-typescript-guidelines.md
+  s_57626d2d710964::t_3b85d65085a73b 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "3b2d41e850ef048bd502fefbecda8071f448236f",
+  "prompts": {},
+  "sessions": {
+    "s_57626d2d710964": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4d91-c490-7d91-a282-ac51ee567e76",
+        "model": "unknown"
+      },
+      "human_author": "yyyanghj <yyyanghj@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
