@@ -1,0 +1,40 @@
+skills/write-maintainable-code/references/01-simplicity-first.md
+  h_dc11774eabf34c 1,3,5,9-10,12-13,17-19,21,23,25,27-30,34-41,43,46,50,52,56,58-60,64-65,67-68,72,78,82-83
+skills/write-maintainable-code/references/02-control-flow-and-functions.md
+  h_dc11774eabf34c 1-186
+skills/write-maintainable-code/SKILL.md
+  s_ba81da69fa21bf::t_d399b1a7924500 3,8-35,37,39-44,46,48-53,55,57
+skills/write-maintainable-code/agents/openai.yaml
+  s_ba81da69fa21bf::t_c05fed0a44e243 3-4
+skills/write-maintainable-code/references/03-data-functions-and-classes.md
+  s_ba81da69fa21bf::t_0c3089e10cab99 1,3,8-15,19-20,22-25,27,29-31,33-35,37,39-42,46,49-51,55-56,59,62-63,66
+skills/write-maintainable-code/references/04-error-contracts.md
+  s_ba81da69fa21bf::t_3edf43258f8429 1,3,7-11,15-20,22,24,26-29,33,35,37-43,48,51-52,54-56,58-60,62-63
+skills/write-maintainable-code/references/05-explicit-dynamic-behavior.md
+  s_ba81da69fa21bf::t_d1ec02ae41a8fc 1,3,5,7,11-17,21-26,28,30,32,38,40-46,48,50-56,60,64,67,69-72,77,79-84
+skills/write-maintainable-code/references/06-typescript.md
+  s_ba81da69fa21bf::t_0ae9f9a2dbea2c 1,3,7-13,15,17,19-24,26,30,33-34,38,41-54,58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "d1fbca156e02ebb31e5c1828882c5adf863d6f67",
+  "prompts": {},
+  "humans": {
+    "h_dc11774eabf34c": {
+      "author": "yyyanghj <yyyanghj@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_ba81da69fa21bf": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4da0-5ce9-7660-a6d4-e9b066678040",
+        "model": "unknown"
+      },
+      "human_author": "yyyanghj <yyyanghj@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
