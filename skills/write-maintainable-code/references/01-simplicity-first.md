@@ -1,112 +1,88 @@
-# Prefer Simplicity First
+# Put Simplicity First
 
-Choose the smallest design that is obviously correct for the current requirement. Optimize for local reasoning: a reader should understand the code in one pass without reconstructing a framework in their head.
+Choose the smallest design that is clearly correct for the requirement that exists now. Add a layer only when it removes demonstrated complexity or protects a real boundary.
 
-Prefer boring code over impressive code. Future changes are easier when the current code is obvious.
-
-## Use This Rule When
-
-- Starting a new function, module, or API.
-- Choosing between inline logic and a reusable abstraction.
-- Deciding whether to add configuration, inheritance, or a generic helper.
+Prefer boring code over impressive code when both solve the problem clearly.
 
 ## Prefer
 
-- One clear flow from input to output.
+- Concrete types and direct return shapes.
+- Small public APIs and visible data flow.
 - Existing language features before custom frameworks.
-- Concrete types and straightforward data shapes.
-- Short-lived duplication when the shared shape is not stable yet.
+- Temporary duplication while a shared shape is still changing.
+- Incremental extraction after repeated change pressure appears.
 
 ## Avoid
 
-- Abstract base types used only once.
-- Extension points for features that do not exist yet.
+- Abstract types, factories, or extension points with one speculative use.
+- Service, repository, mapper, or DTO layers with no real boundary or transformation.
+- Configuration options that no current caller needs.
 - Indirection added only to look scalable.
-- Optimizations without a measured bottleneck.
+- Optimization without a measured bottleneck.
 
-## Ask Before Adding Complexity
+Keep an abstraction with one caller when it enforces a public contract, isolates an unstable dependency, or owns cross-cutting policy.
 
-- Does this solve a real requirement that exists today?
-- Will at least two current call sites benefit from the abstraction?
-- Does the abstraction make the happy path easier to understand?
-- Would removing this layer make the code clearer? If yes, remove it.
+## Decision Check
 
-## Review Checklist
-
-- Can a new reader explain the code after one read?
-- Are the main data shapes visible at the point of use?
-- Are extra interfaces, classes, or helpers paying for themselves right now?
-- Is the simplest version already good enough?
+- What current pain does the abstraction remove?
+- Does it remove repeated changes rather than merely repeated lines?
+- Is the happy path easier to understand with the layer present?
+- Would deleting the layer lose a real boundary, policy, or contract?
 
 ## Example
 
-**Bad:**
+Given:
 
 ```ts
-interface IValidatorRule {
+interface UserInput {
+  username: string;
+  password: string;
+}
+```
+
+Avoid a rule engine when two fixed checks are the whole current requirement:
+
+```ts
+interface ValidationRule {
   validate(input: UserInput): string | null;
 }
 
-class RequiredFieldRule implements IValidatorRule {
+class RequiredUsernameRule implements ValidationRule {
   validate(input: UserInput): string | null {
-    if (!input.username || input.username.trim() === "") {
-      return "Username is required";
-    }
-    return null;
+    return input.username.trim() ? null : "Username is required";
   }
 }
 
-class PasswordLengthRule implements IValidatorRule {
+class MinimumPasswordLengthRule implements ValidationRule {
   validate(input: UserInput): string | null {
-    if (!input.password || input.password.length < 8) {
-      return "Password must be at least 8 chars";
-    }
-    return null;
+    return input.password.length >= 8
+      ? null
+      : "Password must be at least 8 characters";
   }
 }
 
-class ValidationEngine {
-  private rules: IValidatorRule[];
-
-  constructor(rules: IValidatorRule[]) {
-    this.rules = rules;
-  }
-
-  run(input: UserInput): string[] {
-    const errors: string[] = [];
-
-    for (const rule of this.rules) {
-      const error = rule.validate(input);
-      if (error) errors.push(error);
-    }
-
-    return errors;
-  }
+function validateUser(input: UserInput, rules: ValidationRule[]): string[] {
+  return rules.flatMap((rule) => {
+    const error = rule.validate(input);
+    return error ? [error] : [];
+  });
 }
-
-const engine = new ValidationEngine([
-  new RequiredFieldRule(),
-  new PasswordLengthRule(),
-]);
-const errors = engine.run(userFormData);
 ```
 
-**Good:**
+Prefer the direct implementation until callers need configurable rules:
 
 ```ts
 function validateUser(input: UserInput): string[] {
   const errors: string[] = [];
 
-  if (!input.username || input.username.trim() === "") {
+  if (!input.username.trim()) {
     errors.push("Username is required");
   }
 
-  if (!input.password || input.password.length < 8) {
-    errors.push("Password must be at least 8 chars");
+  if (input.password.length < 8) {
+    errors.push("Password must be at least 8 characters");
   }
 
   return errors;
 }
-
-const errors = validateUser(userFormData);
 ```

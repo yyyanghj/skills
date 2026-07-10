@@ -1,4 +1,4 @@
 interface:
   display_name: "Write Maintainable Code"
-  short_description: "Guide agents to write maintainable code"
-  default_prompt: "Read $write-maintainable-code and follow the principles and rules before you write codes."
+  short_description: "Keep code simple, explicit, and maintainable"
+  default_prompt: "Use $write-maintainable-code before writing, refactoring, or reviewing code."
