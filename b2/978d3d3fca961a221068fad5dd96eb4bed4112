@@ -1,0 +1,37 @@
+skills/write-maintainable-code/SKILL.md
+  s_ba81da69fa21bf::t_0c06154e4dd67e 15,35,41,44,50-56,60
+skills/write-maintainable-code/references/01-simplicity-first.md
+  s_ba81da69fa21bf::t_de112951df18a6 3
+skills/write-maintainable-code/references/02-flat-and-linear-logic.md
+  s_ba81da69fa21bf::t_b030eb427f3d8f 1,13,20-21,27,29,53
+skills/write-maintainable-code/references/03-excessive-indirection-example.md
+  s_ba81da69fa21bf::t_b0fb3c4a6bced5 1-69
+skills/write-maintainable-code/references/04-simple-and-predictable-functions.md
+  s_ba81da69fa21bf::t_1412baf23cc40a 1-67
+skills/write-maintainable-code/references/05-data-functions-and-classes.md
+  s_ba81da69fa21bf::t_249784e940bdaa 3,9,13
+skills/write-maintainable-code/references/06-error-handling.md
+  s_ba81da69fa21bf::t_7a32355e88aa64 1
+skills/write-maintainable-code/references/07-explicit-code-no-magic.md
+  s_ba81da69fa21bf::t_dad3be48968359 3,60,67-70,77-78
+skills/write-maintainable-code/references/08-typescript-guidelines.md
+  s_ba81da69fa21bf::t_c50a4e8fc642b5 3,11,24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "b2978d3d3fca961a221068fad5dd96eb4bed4112",
+  "prompts": {},
+  "sessions": {
+    "s_ba81da69fa21bf": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4da0-5ce9-7660-a6d4-e9b066678040",
+        "model": "unknown"
+      },
+      "human_author": "yyyanghj <yyyanghj@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
