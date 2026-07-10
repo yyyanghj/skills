@@ -8,6 +8,7 @@ Use TypeScript as a tool for clarity, not ceremony. Prefer types that make data 
 - ESM imports and explicit extensions when the runtime requires them.
 - Type inference for local variables when the type is obvious.
 - Explicit types for exported functions, public APIs, and boundary objects.
+- Define file- and module-level functions with `function` declarations, not arrow-function expressions.
 - `unknown` plus narrowing over `any`, and prefer simple unions or interfaces over deeply abstracted type systems.
 
 ## Avoid

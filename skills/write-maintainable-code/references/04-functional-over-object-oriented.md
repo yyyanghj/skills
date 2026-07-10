@@ -1,6 +1,6 @@
 # Prefer Functions over Class Hierarchies
 
-Use functions and plain objects by default. Reach for classes only when there is a real need for stateful lifecycle management, framework integration, or a stable abstraction over external resources.
+Use functions and plain objects by default. Class-based modeling is the exception, not the default. Reach for classes only when there is a real need for stateful lifecycle management, framework integration, or a stable abstraction over external resources.
 
 Think of it as writing C or Go in your target language: **data is data, functions are functions, control flow is control flow**. Treat a language's "advanced features" as occasional tools, not the default unit of organization.
 
@@ -20,9 +20,11 @@ Think of it as writing C or Go in your target language: **data is data, function
 ## Separate Data and Behavior
 
 - Default to describing data shapes with `struct` / `interface` / plain types — fields only, no methods attached.
-- Default to putting behavior in top-level functions that take the data as the **first parameter**: `processX(x, ...)` instead of `x.process(...)`.
+- Create data with regular or factory functions: `createUser(...)` instead of `new User(...)`.
+- Default to putting behavior in top-level functions that take the data as the **first parameter**: `updateUser(user, patch)` instead of `user.update(patch)`.
 - Group related functions by file or module, not by wrapping them in a class just to "organize" them.
-- **Pragmatic exception:** this is a preference, not a prohibition. When a `class` genuinely makes a piece of code more readable and friendly — for example, it manages real internal state, plays nicely with the framework, or encapsulates a resource — use a class. Pick the shape that a reader will understand fastest.
+- **Pragmatic exception:** this is a preference, not a prohibition. When a `class` meets one of the criteria below and makes the code clearer, use it.
+- Treat a justified class like a Go or Rust struct with methods: a container for state and invariants, not an inheritance-based domain model.
 
 ## File Is the Module Boundary
 
@@ -38,8 +40,7 @@ Think of it as writing C or Go in your target language: **data is data, function
 
 ## Avoid
 
-- Inheritance hierarchies (especially multi-level or abstract base classes) that exist only to share a few methods.
-- Base classes with optional hooks and protected state.
+- Inheritance hierarchies, abstract base classes, parent-class hooks, template methods, and `is-a` taxonomies; prefer composition and explicit dependency passing.
 - Constructors that hide important setup work.
 - Objects whose only job is to wrap one function call.
 - `this`-dependent method chains — unless the object genuinely owns internal state (rare).
@@ -48,9 +49,10 @@ Think of it as writing C or Go in your target language: **data is data, function
 ## Classes Are Acceptable When
 
 - A framework or language feature requires them.
-- You are managing long-lived state with clear lifecycle rules.
-- You are encapsulating a resource such as a socket, file handle, or cache client.
-- Polymorphism is solving an active problem with multiple concrete implementations.
+- The object has meaningful identity or lifecycle rules.
+- The object owns internal mutable state or a cache shared across operations.
+- The object manages a resource such as a connection, file handle, transaction, or subscription, including its `dispose` or cleanup behavior.
+- Private implementation details or invariants must remain consistent across operations.
 
 ## Review Checklist
 
