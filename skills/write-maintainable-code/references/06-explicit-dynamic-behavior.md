@@ -1,10 +1,8 @@
 # Explicit Dynamic Behavior
 
-Prefer syntax and control flow that maintainers can understand locally. Keep behavior selection, wiring, and runtime effects visible.
+Keep behavior selection, dependency wiring, and runtime effects visible. A maintainer should understand how code is chosen and invoked without relying on import side effects, hidden registration, or unusual language knowledge.
 
-## Portability
-
-Treat portability as a tiebreaker, not a ban. When alternatives are equally clear, choose familiar constructs with explicit semantics that transfer across languages. Use a language-specific or less common feature when it materially improves clarity, removes more complexity than it adds, fits the repository and toolchain, and can remain narrow and conventional.
+Treat portability as a tiebreaker, not a ban. When alternatives are equally clear, prefer familiar constructs with explicit semantics that transfer across languages. Use a language-specific or advanced feature when it materially reduces complexity, fits the repository, and remains understandable in its local context.
 
 ## Prefer
 
@@ -14,20 +12,34 @@ Treat portability as a tiebreaker, not a ban. When alternatives are equally clea
 - Validation where untyped or external data enters the system.
 - Explicit rejection of unknown cases instead of undefined behavior.
 - Exhaustive branches for closed sets of variants.
-- Lookup tables when the mapping is stable, validated, and clearer than branching.
+- Explicit `switch` or `if` statements for behavior dispatch.
+- Lookup tables for static data mappings, not action, rule, or strategy dispatch.
 
 ## Avoid
 
 - Registration through import side effects.
 - String-based dispatch without input validation.
+- Action, rule, or strategy maps that hide behavior behind dynamic lookup.
 - Decorators or metaprogramming that hide ownership or execution order.
-- Runtime magic such as prototype mutation, metaclasses, or dynamic method synthesis when a direct construct would work.
+- Prototype mutation, metaclasses, or dynamic method synthesis when a direct construct works.
 - Runtime-heavy pipelines when a direct branch or loop is clearer.
 - Type-level machinery that is harder to understand than the data it describes.
+- Advanced features used for novelty rather than lower total cognitive load.
 
-## Model Closed Variants Explicitly
+## Design and Review Check
 
-Use a tagged union or the language's equivalent when a value can be one of a fixed set of shapes. Keep dispatch in one visible place when doing so makes the behavior easier to inspect.
+Use these questions while designing dynamic behavior and reviewing the implementation:
+
+- Can a reader see how behavior is selected, wired, and invoked?
+- Is dynamic input validated before dispatch?
+- Do unknown cases fail explicitly and diagnostically?
+- Is every closed variant handled exhaustively?
+- Does the advanced feature reduce more complexity than it adds?
+- When alternatives are equally clear, does the design use the more familiar and portable construct?
+
+## Examples
+
+### Example: Closed Variants
 
 Avoid behavior scattered through an inheritance hierarchy:
 
@@ -80,11 +92,47 @@ function calculateArea(shape: Shape): number {
 }
 ```
 
-## Review Check
+### Example: Explicit Behavior Dispatch
 
-- Can a reader see how behavior is selected and invoked?
-- Is dynamic input validated before dispatch?
-- Do unknown cases fail explicitly and diagnostically?
-- Does the advanced feature reduce total cognitive load here?
-- When alternatives are equally clear, does the design avoid unnecessary runtime-specific semantics?
-- Would a maintainer need unusual language knowledge to change this safely?
+Given a closed set of payment variants:
+
+```ts
+type PaymentKind = "card" | "paypal";
+
+interface Payment {
+  kind: PaymentKind;
+  amountInCents: number;
+}
+```
+
+Avoid hiding action dispatch behind a strategy map:
+
+```ts
+type PaymentHandler = (payment: Payment) => Promise<void>;
+
+const paymentHandlers: Record<Payment["kind"], PaymentHandler> = {
+  card: handleCard,
+  paypal: handlePayPal,
+};
+
+async function dispatchPayment(payment: Payment): Promise<void> {
+  await paymentHandlers[payment.kind](payment);
+}
+```
+
+Prefer an explicit and exhaustive branch:
+
+```ts
+async function dispatchPayment(payment: Payment): Promise<void> {
+  switch (payment.kind) {
+    case "card":
+      await handleCard(payment);
+      return;
+    case "paypal":
+      await handlePayPal(payment);
+      return;
+    default:
+      throw new Error("Unsupported payment kind");
+  }
+}
+```

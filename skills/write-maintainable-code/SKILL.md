@@ -1,6 +1,6 @@
 ---
 name: write-maintainable-code
-description: Write solution-focused, simplicity-first code without over-engineering. Use before writing, refactoring, or reviewing code.
+description: Design and write solution-focused, simplicity-first code without over-engineering. Use before planning architecture or changes, writing, refactoring, or reviewing code.
 ---
 
 # Write Maintainable Code
@@ -9,7 +9,8 @@ description: Write solution-focused, simplicity-first code without over-engineer
 
 - **Solution-focused:** Complete the requested task directly. Implement only when implementation is requested; for review tasks, report findings without modifying code unless asked. Be concise and keep changes or explanations limited to decisions that affect the task.
 - **Simplicity first:** Choose the simplest design that is clearly correct for the current requirement.
-- **Avoid over-engineering:** Add complexity only when a current requirement, concrete boundary, or measured problem demands it.
+- **Boring code is fine:** Prefer straightforward, familiar code over clever code that saves lines but increases cognitive load.
+- **Avoid over-engineering:** Do not add speculative complexity for unknown needs.
 
 ## Process
 
@@ -57,10 +58,10 @@ Apply SOLID as a core design discipline across functions, modules, and classes. 
 
 ## Reference Map
 
-- Read [Simplicity First](references/01-simplicity-first.md) when starting or shaping a function, module, or public API, and when choosing boundaries, layers, interfaces, or reusable abstractions.
+- Read [Simplicity First](references/01-simplicity-first.md) when planning or reviewing architecture, solutions, change lists, functions, modules, public APIs, boundaries, layers, interfaces, or abstractions.
 - Read [Flat and Linear Control Flow](references/02-flat-and-linear-control-flow.md) when logic is nested, fragmented across helpers or callbacks, or jumps across functions or files.
 - Read [Simple and Predictable Functions](references/03-simple-and-predictable-functions.md) when writing, refactoring, or reviewing functions, including business logic, data transforms, state, mutation, effects, hidden dependencies, or helper extraction.
-- Read [Data, Objects, Functions, and Classes](references/04-data-objects-functions-and-classes.md) when deciding between plain data, functions, objects, classes, inheritance, and composition.
+- Read [Data, Objects, Functions, and Classes](references/04-data-objects-functions-and-classes.md) when modeling or reviewing data and behavior in JavaScript or TypeScript, or choosing or reviewing plain data, functions, objects, classes, inheritance, and composition.
 - Read [Error Handling](references/05-error-handling.md) when calling HTTP services, databases, filesystems, processes, queues, or other external systems, and when adding absence handling, exceptions, retries, fallbacks, or user-facing errors.
 - Read [Explicit Dynamic Behavior](references/06-explicit-dynamic-behavior.md) when using registries, string dispatch, metaprogramming, advanced language features, or runtime wiring.
 - Read [TypeScript Conventions](references/07-typescript-conventions.md) for TypeScript code, types, exports, functions, and file naming.

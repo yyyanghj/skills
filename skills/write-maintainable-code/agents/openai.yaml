@@ -1,4 +1,4 @@
 interface:
   display_name: "Write Maintainable Code"
   short_description: "Keep code simple, explicit, and maintainable"
-  default_prompt: "Use $write-maintainable-code before writing, refactoring, or reviewing code."
+  default_prompt: "Use $write-maintainable-code before planning, designing, writing, refactoring, or reviewing code."

@@ -1,34 +1,42 @@
 # Error Handling
 
-Treat failure as part of the API contract. Distinguish expected absence from unexpected failure, and handle each error at the closest boundary that can act on it.
+Treat failure as part of the API contract. Distinguish expected absence, recoverable failure, and unexpected failure so callers can tell what happened and what they may do next.
+
+Handle an error at the closest boundary that can make a meaningful decision about retry, translation, fallback, logging, or user communication. Otherwise preserve the original failure and let it propagate.
 
 ## Prefer
 
 - `null`, `undefined`, or a union for expected absence when that matches repository conventions.
-- A result type when callers must handle expected failure explicitly.
+- A result type when callers must handle an expected failure explicitly.
 - Exceptions for failures the current operation cannot recover from.
-- Catching at boundaries that own retry, logging, translation, fallback, or user messaging.
-- Preserving the original error as a cause when adding context.
+- Catching at the boundary that owns retry, translation, fallback, logging, or user messaging.
+- Preserving the original error as `cause` when adding context.
+- Explicit retry policies that account for idempotency, limits, and backoff.
 
 ## Avoid
 
 - Exceptions used for ordinary branching.
-- Catching an error only to return fake success or a vague fallback.
+- Catching an error only to return fake success, absence, or a vague fallback.
 - Converting unrelated failures into the same result.
 - Retrying non-idempotent operations without an explicit safety policy.
 - Catching before the code can make a meaningful recovery decision.
+- Swallowing the original error while adding context.
 - Introducing a custom result wrapper when the repository already has a pattern.
 
-Let unexpected failures propagate when the current layer cannot handle them. A top-level handler is useful as a final logging or response boundary, but it should not repair arbitrary failures after the fact.
+## Design and Review Check
 
-## Decision Check
+Use these questions while designing the error contract and reviewing the implementation:
 
-- Is this outcome expected absence, recoverable failure, or an invariant violation?
-- Can the caller tell what happened and what it may do next?
-- Which boundary owns retry, translation, logging, or user communication?
+- Is the outcome expected absence, recoverable failure, or an invariant violation?
+- Can the caller distinguish the relevant failure cases?
+- Which boundary owns retry, translation, fallback, logging, or user communication?
+- Can the current layer actually recover, or should the error propagate?
 - Are the original error details preserved?
+- Is every retry safe for the operation being repeated?
 
-## Example
+## Examples
+
+### Example: Absence Is Not Every Failure
 
 Suppose `404` means an expected missing user while network and server failures are exceptional.
 
@@ -45,21 +53,44 @@ async function getUser(id: string): Promise<User | null> {
 }
 ```
 
-Encode the contract explicitly:
+Prefer encoding the contract explicitly:
 
 ```ts
 async function getUser(id: string): Promise<User | null> {
   const response = await fetch(`/api/users/${id}`);
 
-  if (response.status === 404) {
-    return null;
-  }
-
+  if (response.status === 404) return null;
   if (!response.ok) {
     throw new Error(`Failed to load user: HTTP ${response.status}`);
   }
 
   const payload: unknown = await response.json();
   return parseUser(payload);
+}
+```
+
+### Example: Preserve the Original Cause
+
+Avoid replacing a diagnostic failure with a context-free error:
+
+```ts
+async function loadConfig(path: string): Promise<Config> {
+  try {
+    return parseConfig(await readFile(path, "utf8"));
+  } catch {
+    throw new Error("Failed to load config");
+  }
+}
+```
+
+Prefer adding useful context while preserving the cause:
+
+```ts
+async function loadConfig(path: string): Promise<Config> {
+  try {
+    return parseConfig(await readFile(path, "utf8"));
+  } catch (error) {
+    throw new Error(`Failed to load config: ${path}`, { cause: error });
+  }
 }
 ```

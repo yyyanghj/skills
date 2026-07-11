@@ -1,34 +1,42 @@
 # Flat and Linear Control Flow
 
-Keep execution flat, linear, and local. A reader should be able to trace the path from entry point to effect from top to bottom without repeatedly jumping across thin functions, callbacks, or files.
+Keep execution flat, linear, and local. A reader should be able to trace the path from entry point to effect from top to bottom without repeatedly jumping across branches, callbacks, helpers, or files.
 
-## Rules
+Flat control flow does not mean placing everything in one function. Keep meaningful boundaries, but do not create one-off helpers whose only effect is forcing the reader to jump elsewhere for a local detail.
 
-### Prefer
+## Prefer
 
 - Guard clauses for invalid state and edge cases.
-- One visible orchestrator that calls leaf operations in execution order.
+- One visible orchestrator that calls meaningful operations in execution order.
 - Direct local variables, loops, and branches.
+- Short one-use expressions kept near the code that needs them.
 - State changes close to the conditions that trigger them.
-- A few meaningful stages instead of many one-call steps.
+- Helpers that own real logic, policy, stable behavior repeated across current callers, or an unstable dependency boundary.
 
-### Avoid
+## Avoid
 
 - Deeply nested `if`, `else`, or callback chains.
-- Forcing readers to bounce across functions or files to reconstruct one synchronous flow.
-- Callback parameters whose only purpose is to continue execution elsewhere.
+- One-off helpers that only rename a value, access one property, or forward one call.
+- Splitting a local flow into many single-call steps.
+- Callback parameters whose only purpose is to continue synchronous execution elsewhere.
 - Dispatcher chains that forward to another dispatcher.
+- Forcing readers to bounce across files to reconstruct one execution path.
 - Hiding important branches behind vague helper names.
 
-### Review Check
+## Design and Review Check
+
+Use these questions while designing the flow and reviewing the implementation:
 
 - Can a reader follow the main path from top to bottom?
-- Are important branches and state changes visible near their effects?
-- Does each helper own meaningful logic or policy, or isolate a meaningful unstable dependency boundary?
-- Would inlining a callback or forwarding layer make execution easier to trace?
 - Is the happy path visually dominant?
+- Are important branches and state changes visible near their effects?
+- Does each helper own meaningful logic, policy, stable behavior repeated across current callers, or a real boundary?
+- Would inlining a one-use helper make the code easier to trace?
+- Does the design introduce callbacks or files that only continue the same synchronous flow?
 
-## Example: Flatten Branches
+## Examples
+
+### Example: Flatten Branches
 
 Avoid nested control flow:
 
@@ -62,7 +70,31 @@ function saveUser(user: User | null): void {
 }
 ```
 
-## Example: Traceable Execution Paths
+### Example: One-Use Helper
+
+Avoid a helper that only hides a local property access:
+
+```ts
+function getReceiptEmail(order: Order): string {
+  return order.customer.email;
+}
+
+function completeCheckout(order: Order): void {
+  persistOrder(order);
+  sendReceipt(getReceiptEmail(order), order.id);
+}
+```
+
+Prefer keeping the detail at its single point of use:
+
+```ts
+function completeCheckout(order: Order): void {
+  persistOrder(order);
+  sendReceipt(order.customer.email, order.id);
+}
+```
+
+### Example: Traceable Execution Path
 
 Avoid callback wrappers that make one synchronous checkout flow jump between files.
 
@@ -71,20 +103,15 @@ Avoid callback wrappers that make one synchronous checkout flow jump between fil
 ```ts
 import { chargePayment, loadCart, reserveInventory } from "./checkout-steps.js";
 
-function validateOrderAndPay(order: Order): void {
+loadCart((cart) => {
+  const order = startCheckout(cart);
   validateOrder(order);
 
   reserveInventory(order, () => {
-    const total = calculateTotal(order);
-    chargePayment(total);
+    chargePayment(calculateTotal(order));
     sendReceipt(order);
+    finishCheckout(order);
   });
-}
-
-loadCart((cart) => {
-  const order = startCheckout(cart);
-  validateOrderAndPay(order);
-  finishCheckout(order);
 });
 ```
 
@@ -108,9 +135,7 @@ export function chargePayment(total: number): void {
 }
 ```
 
-Remove `checkout-steps.ts`. Keep orchestration in one place and call the real I/O boundaries directly.
-
-`checkout.ts`:
+Prefer one visible orchestrator that calls the real boundaries directly:
 
 ```ts
 import { readCart, writeInventoryReservation } from "./checkout-store.js";
@@ -121,8 +146,7 @@ function runCheckout(): void {
   const order = startCheckout(cart);
   validateOrder(order);
   writeInventoryReservation(order);
-  const total = calculateTotal(order);
-  submitPayment(total);
+  submitPayment(calculateTotal(order));
   sendReceipt(order);
   finishCheckout(order);
 }
@@ -130,4 +154,38 @@ function runCheckout(): void {
 runCheckout();
 ```
 
-Both versions run the same operations in the same order. The second removes continuation callbacks and forwarding wrappers, so the execution order is visible without cross-file call-stack reconstruction.
+### Example: Nested Ternary
+
+Given:
+
+```ts
+interface ShippingOrder {
+  isInternational: boolean;
+  totalInCents: number;
+}
+```
+
+Avoid compressing several business rules into a nested expression:
+
+```ts
+function calculateShippingFeeInCents(order: ShippingOrder): number {
+  return order.isInternational
+    ? order.totalInCents >= 10_000
+      ? 0
+      : 2_500
+    : order.totalInCents >= 5_000
+      ? 0
+      : 500;
+}
+```
+
+Prefer explicit branches whose decision order is immediately visible:
+
+```ts
+function calculateShippingFeeInCents(order: ShippingOrder): number {
+  if (order.isInternational && order.totalInCents >= 10_000) return 0;
+  if (order.isInternational) return 2_500;
+  if (order.totalInCents >= 5_000) return 0;
+  return 500;
+}
+```
