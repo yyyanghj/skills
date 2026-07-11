@@ -1,0 +1,46 @@
+skills/write-maintainable-code/SKILL.md
+  s_83e4f947cfc554::t_fe919e7714658c 3,8,10,12,14,20-34,36,38,40
+skills/write-maintainable-code/agents/openai.yaml
+  s_83e4f947cfc554::t_4419b3504705d7 3-4
+skills/write-maintainable-code/references/01-simplicity-first.md
+  s_83e4f947cfc554::t_06634220fbc890 3,7,41,43,46-55,59,61,65,67-69,73-77,81,87,91-92
+skills/write-maintainable-code/references/02-flat-and-linear-logic.md
+  s_83e4f947cfc554::t_da4bf989f95f18 3,5,26,40,44,47,51-53,57,60-62,67,92,97,108,128
+skills/write-maintainable-code/references/03-no-over-engineering.md
+  s_83e4f947cfc554::t_684307e8097694 5,39,41,70,85,94
+skills/write-maintainable-code/references/04-functional-over-object-oriented.md
+  s_83e4f947cfc554::t_15e12888d5f96f 7,29,38,49,64,66,69-76,79-80,84-85,88,91-92,96-101,104-105,108-109
+skills/write-maintainable-code/references/05-simple-and-predictable-functions.md
+  s_83e4f947cfc554::t_ed7b2cfd33dc3d 5,28,48,50,67,84-89,92
+skills/write-maintainable-code/references/06-error-handling.md
+  s_83e4f947cfc554::t_124f8c7d69d17a 5,25,39,41,44-50,54,57-58,60-66,68-70,73
+skills/write-maintainable-code/references/07-explicit-code-no-magic.md
+  s_83e4f947cfc554::t_58665d942ee574 5,28,34,50,57-60,63-68,93,95,108,111
+skills/write-maintainable-code/references/08-naming-rules.md
+  s_83e4f947cfc554::t_4e90c1cf3f55f4 36-49
+skills/write-maintainable-code/references/09-typescript-guidelines.md
+  s_83e4f947cfc554::t_da082adc6cc311 34-65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "fb83027b5420c3a46aa5df39ec88338e6ed0fa95",
+  "prompts": {},
+  "humans": {
+    "h_dc11774eabf34c": {
+      "author": "yyyanghj <yyyanghj@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_83e4f947cfc554": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4fc6-8edb-7882-825e-2c64a9ed4b41",
+        "model": "unknown"
+      },
+      "human_author": "yyyanghj <yyyanghj@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
