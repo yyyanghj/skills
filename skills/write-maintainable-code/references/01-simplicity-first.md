@@ -1,8 +1,21 @@
-# Put Simplicity First and Avoid Over-Engineering
+# Simplicity First
 
 Use these rules to choose function, module, API, and abstraction shape.
 
 Prefer boring code over impressive code when both solve the problem clearly.
+
+## Avoid Over-Engineering
+
+Do not add abstractions, layers, extension points, configuration, or optimizations for hypothetical future needs. Add complexity only when a current requirement, real boundary, or measured problem justifies it.
+
+Examples:
+
+- **Single implementation:** Call the concrete function directly instead of adding an interface, factory, or registry for implementations that do not exist.
+- **Real dependency boundary:** Use one focused adapter to isolate an unstable SDK or external API; do not surround it with service, repository, mapper, and DTO layers unless each layer owns distinct behavior.
+- **Unproven reuse:** Keep a small amount of duplication while similar code still changes for different reasons. Extract shared logic after repeated changes reveal a stable concept.
+- **Performance:** Measure the bottleneck before adding caches, batching, workers, or concurrency controls.
+
+An abstraction with one caller is still justified when it enforces a public contract, isolates an unstable dependency, or owns cross-cutting policy.
 
 ## Prefer
 
@@ -19,8 +32,6 @@ Prefer boring code over impressive code when both solve the problem clearly.
 - Configuration options that no current caller needs.
 - Indirection added only to look scalable.
 - Optimization without a measured bottleneck.
-
-Keep an abstraction with one caller when it enforces a public contract, isolates an unstable dependency, or owns cross-cutting policy.
 
 ## Decision Check
 

@@ -1,4 +1,4 @@
-# Choose Data, Functions, and Classes Deliberately
+# Data, Objects, Functions, and Classes
 
 Prefer plain data and functions by default. Apply the criteria in `Use a Class When` before introducing a class.
 

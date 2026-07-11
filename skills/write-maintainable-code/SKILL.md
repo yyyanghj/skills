@@ -36,6 +36,16 @@ For file names, follow the repository first, then established language or commun
 - Name by domain purpose rather than implementation mechanism, and make similar concepts easy to distinguish.
 - Use familiar language features by default. Use an advanced feature when it makes the code materially clearer and remains understandable in its local context.
 
+### SOLID
+
+Apply SOLID as a core design discipline across functions, modules, and classes. Use it to keep changes local and contracts clear; do not translate each principle into a new class, interface, or layer.
+
+- **Single Responsibility:** Give each function, module, or class one cohesive responsibility and one primary reason to change.
+- **Open/Closed:** Protect stable behavior from repeated edits when real variants exist. Prefer composition or explicit strategy selection; do not create extension points for hypothetical variants.
+- **Liskov Substitution:** Require every implementation to honor the full contract, including inputs, outputs, errors, side effects, and lifecycle expectations. Split the abstraction when implementations need exceptions.
+- **Interface Segregation:** Expose small interfaces shaped around caller needs. Do not make consumers or implementations depend on unrelated operations.
+- **Dependency Inversion:** Keep domain policy independent of volatile infrastructure by passing dependencies explicitly or placing a narrow abstraction at the boundary. Do not add an interface for every concrete dependency.
+
 ## Core Avoid
 
 - Over-engineering through speculative abstractions, unused extension points, unnecessary layers or configuration, and unmeasured optimizations.
@@ -47,14 +57,13 @@ For file names, follow the repository first, then established language or commun
 
 ## Reference Map
 
-- Read [Put Simplicity First and Avoid Over-Engineering](references/01-simplicity-first.md) when starting or shaping a function, module, or public API, and when choosing boundaries, layers, interfaces, or reusable abstractions.
-- Read [Keep Control Flow Flat and Linear](references/02-flat-and-linear-logic.md) when logic is nested, fragmented across helpers or callbacks, or jumps across functions or files.
-- Read [Avoid Excessive Indirection](references/03-excessive-indirection-example.md) when tracing a flow requires following callback, dispatcher, or helper chains across functions or files.
-- Read [Keep Functions Simple and Predictable](references/04-simple-and-predictable-functions.md) when writing, refactoring, or reviewing functions, including business logic, data transforms, state, mutation, effects, hidden dependencies, or helper extraction.
-- Read [Choose Data, Functions, and Classes Deliberately](references/05-data-functions-and-classes.md) when deciding between plain data, functions, objects, classes, inheritance, and composition.
-- Read [Handle Errors Deliberately](references/06-error-handling.md) when calling HTTP services, databases, filesystems, processes, queues, or other external systems, and when adding absence handling, exceptions, retries, fallbacks, or user-facing errors.
-- Read [Keep Dynamic Behavior Explicit](references/07-explicit-code-no-magic.md) when using registries, string dispatch, metaprogramming, advanced language features, or runtime wiring.
-- Read [Apply TypeScript Conventions](references/08-typescript-guidelines.md) for TypeScript code, types, exports, functions, and file naming.
+- Read [Simplicity First](references/01-simplicity-first.md) when starting or shaping a function, module, or public API, and when choosing boundaries, layers, interfaces, or reusable abstractions.
+- Read [Flat and Linear Control Flow](references/02-flat-and-linear-control-flow.md) when logic is nested, fragmented across helpers or callbacks, or jumps across functions or files.
+- Read [Simple and Predictable Functions](references/03-simple-and-predictable-functions.md) when writing, refactoring, or reviewing functions, including business logic, data transforms, state, mutation, effects, hidden dependencies, or helper extraction.
+- Read [Data, Objects, Functions, and Classes](references/04-data-objects-functions-and-classes.md) when deciding between plain data, functions, objects, classes, inheritance, and composition.
+- Read [Error Handling](references/05-error-handling.md) when calling HTTP services, databases, filesystems, processes, queues, or other external systems, and when adding absence handling, exceptions, retries, fallbacks, or user-facing errors.
+- Read [Explicit Dynamic Behavior](references/06-explicit-dynamic-behavior.md) when using registries, string dispatch, metaprogramming, advanced language features, or runtime wiring.
+- Read [TypeScript Conventions](references/07-typescript-conventions.md) for TypeScript code, types, exports, functions, and file naming.
 
 ## Completion Criterion
 

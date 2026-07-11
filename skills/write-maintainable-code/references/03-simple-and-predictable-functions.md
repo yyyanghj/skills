@@ -1,4 +1,4 @@
-# Keep Functions Simple and Predictable
+# Simple and Predictable Functions
 
 Make each function's inputs, outputs, state, and side effects obvious. Prefer the same input to produce the same result unless the function clearly exists to perform an effect.
 

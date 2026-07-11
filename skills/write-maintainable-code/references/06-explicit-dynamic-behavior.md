@@ -1,4 +1,4 @@
-# Keep Dynamic Behavior Explicit
+# Explicit Dynamic Behavior
 
 Prefer syntax and control flow that maintainers can understand locally. Keep behavior selection, wiring, and runtime effects visible.
 

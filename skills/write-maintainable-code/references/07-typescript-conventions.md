@@ -1,4 +1,4 @@
-# Apply TypeScript Conventions
+# TypeScript Conventions
 
 Use TypeScript to clarify data flow, public contracts, and failure modes. Apply the Priority in `SKILL.md` when guidance conflicts.
 
