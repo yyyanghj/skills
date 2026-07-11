@@ -1,0 +1,23 @@
+skills/write-maintainable-code/SKILL.md
+  s_ba81da69fa21bf::t_774cb8083163e9 3,11-12,41,50
+skills/write-maintainable-code/references/01-simplicity-first.md
+  s_ba81da69fa21bf::t_43454a553c5b78 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "22a04d5c623bdd8ea84e14459b04ce26c4377f4a",
+  "prompts": {},
+  "sessions": {
+    "s_ba81da69fa21bf": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4da0-5ce9-7660-a6d4-e9b066678040",
+        "model": "unknown"
+      },
+      "human_author": "yyyanghj <yyyanghj@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
