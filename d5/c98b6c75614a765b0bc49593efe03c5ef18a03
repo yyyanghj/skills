@@ -1,0 +1,28 @@
+skills/write-maintainable-code/SKILL.md
+  s_ba81da69fa21bf::t_ce68b8d1f5b3a9 63
+skills/write-maintainable-code/references/04-data-objects-functions-and-classes.md
+  s_ba81da69fa21bf::t_a7ca64b4201f4a 3-57,71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "d5c98b6c75614a765b0bc49593efe03c5ef18a03",
+  "prompts": {},
+  "humans": {
+    "h_dc11774eabf34c": {
+      "author": "yyyanghj <yyyanghj@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_ba81da69fa21bf": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4da0-5ce9-7660-a6d4-e9b066678040",
+        "model": "unknown"
+      },
+      "human_author": "yyyanghj <yyyanghj@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
