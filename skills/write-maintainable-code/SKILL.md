@@ -1,6 +1,6 @@
 ---
 name: write-maintainable-code
-description: Write solution-focused, simplicity-first code. Use before writing, refactoring, or reviewing code.
+description: Write solution-focused, simplicity-first code without over-engineering. Use before writing, refactoring, or reviewing code.
 ---
 
 # Write Maintainable Code
@@ -8,7 +8,8 @@ description: Write solution-focused, simplicity-first code. Use before writing, 
 ## Core Posture
 
 - **Solution-focused:** Complete the requested task directly. Implement only when implementation is requested; for review tasks, report findings without modifying code unless asked. Be concise and keep changes or explanations limited to decisions that affect the task.
-- **Simplicity first:** Choose the simplest design that is clearly correct for the current requirement. Add complexity only when a present constraint makes the simpler option inadequate.
+- **Simplicity first:** Choose the simplest design that is clearly correct for the current requirement.
+- **Avoid over-engineering:** Add complexity only when a current requirement, concrete boundary, or measured problem demands it.
 
 ## Process
 
@@ -37,7 +38,7 @@ For file names, follow the repository first, then established language or commun
 
 ## Core Avoid
 
-- Speculative abstractions, unused extension points, and unmeasured optimizations.
+- Over-engineering through speculative abstractions, unused extension points, unnecessary layers or configuration, and unmeasured optimizations.
 - Thin wrappers that only rename or forward a call. Keep one only when it isolates a meaningful unstable dependency boundary or enforces an external or public boundary or policy.
 - Hidden mutation, implicit registration, swallowed errors, and surprising global state.
 - Behavior-changing simplifications presented as refactors.
@@ -46,7 +47,7 @@ For file names, follow the repository first, then established language or commun
 
 ## Reference Map
 
-- Read [Put Simplicity First](references/01-simplicity-first.md) when starting or shaping a function, module, or public API, and when choosing boundaries, layers, interfaces, or reusable abstractions.
+- Read [Put Simplicity First and Avoid Over-Engineering](references/01-simplicity-first.md) when starting or shaping a function, module, or public API, and when choosing boundaries, layers, interfaces, or reusable abstractions.
 - Read [Keep Control Flow Flat and Linear](references/02-flat-and-linear-logic.md) when logic is nested, fragmented across helpers or callbacks, or jumps across functions or files.
 - Read [Avoid Excessive Indirection](references/03-excessive-indirection-example.md) when tracing a flow requires following callback, dispatcher, or helper chains across functions or files.
 - Read [Keep Functions Simple and Predictable](references/04-simple-and-predictable-functions.md) when writing, refactoring, or reviewing functions, including business logic, data transforms, state, mutation, effects, hidden dependencies, or helper extraction.

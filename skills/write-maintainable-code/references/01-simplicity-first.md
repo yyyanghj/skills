@@ -1,4 +1,4 @@
-# Put Simplicity First
+# Put Simplicity First and Avoid Over-Engineering
 
 Use these rules to choose function, module, API, and abstraction shape.
 
