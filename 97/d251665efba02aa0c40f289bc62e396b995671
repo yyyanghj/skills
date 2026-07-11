@@ -1,0 +1,41 @@
+skills/write-maintainable-code/SKILL.md
+  h_dc11774eabf34c 60,64
+  s_ba81da69fa21bf::t_7ac7c82d824a29 39-48,61-63,65-66
+skills/write-maintainable-code/references/01-simplicity-first.md
+  h_dc11774eabf34c 1,7-19
+skills/write-maintainable-code/references/02-flat-and-linear-control-flow.md
+  s_ba81da69fa21bf::t_f589d1f496e26d 1,64-133
+skills/write-maintainable-code/references/03-simple-and-predictable-functions.md
+  s_ba81da69fa21bf::t_46a6bc38f3eee0 1
+skills/write-maintainable-code/references/04-data-objects-functions-and-classes.md
+  s_ba81da69fa21bf::t_df821ec28ee58f 1
+skills/write-maintainable-code/references/05-error-handling.md
+  s_ba81da69fa21bf::t_d061fa57c8891e 1
+skills/write-maintainable-code/references/06-explicit-dynamic-behavior.md
+  s_ba81da69fa21bf::t_d4a3f140c94ba1 1
+skills/write-maintainable-code/references/07-typescript-conventions.md
+  s_ba81da69fa21bf::t_40a1ecb00a2aac 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "97d251665efba02aa0c40f289bc62e396b995671",
+  "prompts": {},
+  "humans": {
+    "h_dc11774eabf34c": {
+      "author": "yyyanghj <yyyanghj@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_ba81da69fa21bf": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4da0-5ce9-7660-a6d4-e9b066678040",
+        "model": "unknown"
+      },
+      "human_author": "yyyanghj <yyyanghj@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
