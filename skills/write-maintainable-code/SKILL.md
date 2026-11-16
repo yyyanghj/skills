@@ -31,15 +31,17 @@ For file names, follow the repository first, then established language or commun
 
 ## Core Rules
 
+Several rules quote the Zen of Python (PEP 20). Apply those aphorisms as language-agnostic design principles, expressed in the repository's own language and conventions.
+
 - Optimize for local reasoning: make the path from input to effect easy to trace.
-- Keep state, side effects, dynamic wiring, and error paths visible.
+- Explicit is better than implicit: keep state, side effects, dynamic wiring, and error paths visible.
 - Use domain terms, specific nouns, verb-and-noun operations, and question-form boolean names.
 - Name by domain purpose rather than implementation mechanism, and make similar concepts easy to distinguish.
 - Use familiar language features by default. Use an advanced feature when it makes the code materially clearer and remains understandable in its local context.
 
 ### SOLID
 
-Apply SOLID as a core design discipline across functions, modules, and classes. Use it to keep changes local and contracts clear; do not translate each principle into a new class, interface, or layer.
+Apply SOLID as a core design discipline across functions, modules, and classes. Use it to keep changes local and contracts clear. Practicality beats purity: do not translate each principle into a new class, interface, or layer.
 
 - **Single Responsibility:** Give each function, module, or class one cohesive responsibility and one primary reason to change.
 - **Open/Closed:** Protect stable behavior from repeated edits when real variants exist. Prefer composition or explicit strategy selection; do not create extension points for hypothetical variants.

@@ -1,6 +1,6 @@
 # Explicit Dynamic Behavior
 
-Keep behavior selection, dependency wiring, and runtime effects visible. A maintainer should understand how code is chosen and invoked without relying on import side effects, hidden registration, or unusual language knowledge.
+Keep behavior selection, dependency wiring, and runtime effects visible. In the face of ambiguity, refuse the temptation to guess: validate dynamic input and reject unknown cases explicitly. A maintainer should understand how code is chosen and invoked without relying on import side effects, hidden registration, or unusual language knowledge.
 
 Treat portability as a tiebreaker, not a ban. When alternatives are equally clear, prefer familiar constructs with explicit semantics that transfer across languages. Use a language-specific or advanced feature when it materially reduces complexity, fits the repository, and remains understandable in its local context.
 

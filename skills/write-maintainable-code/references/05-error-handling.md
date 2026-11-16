@@ -2,7 +2,7 @@
 
 Treat failure as part of the API contract. Distinguish expected absence, recoverable failure, and unexpected failure so callers can tell what happened and what they may do next.
 
-Handle an error at the closest boundary that can make a meaningful decision about retry, translation, fallback, logging, or user communication. Otherwise preserve the original failure and let it propagate.
+Errors should never pass silently unless explicitly silenced. Handle an error at the closest boundary that can make a meaningful decision about retry, translation, fallback, logging, or user communication. Otherwise preserve the original failure and let it propagate.
 
 ## Prefer
 

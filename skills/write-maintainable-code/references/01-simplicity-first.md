@@ -26,7 +26,7 @@ Apply this principle while designing architecture, shaping a solution, and prepa
 
 ## Design and Review Check
 
-Use these questions while designing the solution, preparing the change list, and reviewing the result:
+If the design is hard to explain, it is a bad idea. Use these questions while designing the solution, preparing the change list, and reviewing the result:
 
 - Can a reader understand the main design in one pass?
 - What current requirement or pain justifies each abstraction?
